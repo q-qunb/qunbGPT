@@ -3,10 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Pages テスト</title>
+    <title>カスタムエディタ</title>
+    <style>
+        /* 全体レイアウト */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Courier New", Courier, monospace;
+            background-color: #f0f0f0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* 編集エリア */
+        #editor-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            background-color: #fff;
+        }
+        #editor {
+            min-height: 100%;
+            outline: none;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            padding: 10px;
+        }
+        /* キーボード */
+        #keyboard {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #ddd;
+            padding: 10px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .key {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            margin: 5px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 20px;
+            cursor: pointer;
+            user-select: none;
+            touch-action: manipulation;
+        }
+        .key.special {
+            background-color: #ffdddd;
+        }
+    </style>
 </head>
 <body>
-    <h1>GitHub Pages が動作しています</h1>
-    <p>このページが表示されれば成功</p>
-</body>
-</html>
+    <!-- 編集エリア -->
+    <div id="editor-container">
+        <div id="editor" contenteditable="true">
+ここに編集対象のテキストが入る。
+        </div>
+    </div>
+
+    <!-- カスタムキーボード -->
+    <div id="keyboard">
+        <div class="key" onclick="insertText('Q')">Q</div>
+        <div class="key" onclick="insertText('W')">W</div>
+        <div class="key" onclick="insertText('E')">E</div>
+        <div class="key" onclick="insertText('R')">R</div>
+        <div class="key" onclick="insertText('T')">T</div>
+        <div class="key" onclick="insertText('Y')">Y</div>
+        <div class="key" onclick="insertText('U')">U</div>
+        <div class="key" onclick="insertText('I')">I</div>
+        <div class="key" onclick="insertText('O')">O</div>
+        <div class="key" onclick="insertText('P')">P</div>
+        <div class="key" onclick="insertText('A')">A</div>
+        <div class="key" onclick="insertText('S')">S</div>
+        <div class="key" onclick="insertText('D')">D</div>
+        <div class="key" onclick="insertText('F')">F</div>
+        <div class="key" onclick="insertText('G')">G</div>
+        <div class="key" onclick="insertText('H')">H</div>
+        <div
