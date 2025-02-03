@@ -84,4 +84,70 @@
         <div class="key" onclick="insertText('F')">F</div>
         <div class="key" onclick="insertText('G')">G</div>
         <div class="key" onclick="insertText('H')">H</div>
-        <div
+        <div class="key" onclick="insertText('J')">J</div>
+        <div class="key" onclick="insertText('K')">K</div>
+        <div class="key" onclick="insertText('L')">L</div>
+        <div class="key special" onclick="deleteLeft()">←削除</div>
+        <div class="key" onclick="insertText('Z')">Z</div>
+        <div class="key" onclick="insertText('X')">X</div>
+        <div class="key" onclick="insertText('C')">C</div>
+        <div class="key" onclick="insertText('V')">V</div>
+        <div class="key" onclick="insertText('B')">B</div>
+        <div class="key" onclick="insertText('N')">N</div>
+        <div class="key" onclick="insertText('M')">M</div>
+        <div class="key special" onclick="deleteRight()">削除→</div>
+        <div class="key" style="flex: 1; text-align:center;" onclick="insertText(' ')">スペース</div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const editor = document.getElementById("editor");
+
+            function insertText(text) {
+                const selection = window.getSelection();
+                const range = selection.getRangeAt(0);
+                range.deleteContents();
+                const textNode = document.createTextNode(text);
+                range.insertNode(textNode);
+                range.setStartAfter(textNode);
+                range.setEndAfter(textNode);
+                selection.removeAllRanges();
+                selection.addRange(range);
+                editor.focus();
+            }
+
+            function deleteLeft() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+                const range = selection.getRangeAt(0);
+                if (range.startOffset > 0) {
+                    range.setStart(range.startContainer, range.startOffset - 1);
+                    range.deleteContents();
+                }
+                editor.focus();
+            }
+
+            function deleteRight() {
+                const selection = window.getSelection();
+                if (!selection.rangeCount) return;
+                const range = selection.getRangeAt(0);
+                range.setEnd(range.startContainer, range.startOffset + 1);
+                range.deleteContents();
+                editor.focus();
+            }
+
+            // キーボードのキーが押されたときにエディタにフォーカスを戻す
+            document.querySelectorAll(".key").forEach(key => {
+                key.addEventListener("click", function () {
+                    editor.focus();
+                });
+            });
+
+            // グローバル関数として提供
+            window.insertText = insertText;
+            window.deleteLeft = deleteLeft;
+            window.deleteRight = deleteRight;
+        });
+    </script>
+</body>
+</html>
